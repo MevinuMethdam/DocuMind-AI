@@ -58,7 +58,11 @@ def get_conversational_chain():
 
     vector_store = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
 
-    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+    memory = ConversationBufferMemory(
+        memory_key="chat_history",
+        return_messages=True,
+        output_key='answer'
+    )
 
     conversation_chain = ConversationalRetrievalChain.from_llm(
         llm=model,
